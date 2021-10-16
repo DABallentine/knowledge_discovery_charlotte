@@ -16,6 +16,11 @@ Data was retrieved from the City of Charlotte's
 <a href="https://data.charlottenc.gov/datasets/charlotte::service-requests-311/about"> Open Data Portal </a> 
 on 30 September, 2021. The data set is a collection of the public records requests received by the City of Charlotte from 2017 through March, 2020. It contains multiple descriptive fields related to service request entry, including request type, location (street, lat/long, etc.), date, city department responsible for the request, and point of entry.
 
+<h2> Python libraries to install</h2>
+Before running any of the Jupyter notebooks mentioned in the repository, the below libraries need to be installed in the local machine using Anaconda:
+pip install missingno
+pip install geopandas
+pip install contextily
 <h2> Data Preprocessing </h2>
 <h2> Data Understanding and Exploration </h2>
 <h2> Data Preparation for Modeling </h2>
