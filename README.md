@@ -12,12 +12,36 @@ The city of Charlotte has, like many cities, made large volumes of data open to 
 <h2> Research Question(s) </h2>
 Do different areas within the city of Charlotte experience higher recurrence of any type of 311 service request than other areas, and do those areas correlate with red-line districts or other known demographic or socioeconomic profiles?
 <h2> Data Resources </h2>
-Data was retrieved from the City of Charlotte's 
-<a href="https://data.charlottenc.gov/datasets/charlotte::service-requests-311/about"> Open Data Portal </a> 
+Data was retrieved from the City of Charlotte's
+<a href="https://data.charlottenc.gov/datasets/charlotte::service-requests-311/about"> Open Data Portal </a>
 on 30 September, 2021. The data set is a collection of the public records requests received by the City of Charlotte from 2017 through March, 2020. It contains multiple descriptive fields related to service request entry, including request type, location (street, lat/long, etc.), date, city department responsible for the request, and point of entry.
-
 <h2> Data Preprocessing </h2>
+<h3> 311 Service Requests </h3>
+From the initial 311 service requests dataset, we dropped 15 features which were either redundant or contained too many missing values. We also dropped just over 99,000 records that contained null values for address, zipcode, and LAT/LON coordinates, since those are the fields of primary interest to our analysis, we have no reasonable way to impute those fields, and that represented only about 5.5% of the data. Finally, we dropped an additional 8,279 records which pertained to COVID-19 protocols, Solid Waste Services administrative functions such as a data upload, and 8 additional call types which had fewer than 10 total occurrences. <br>
+Moving on with the 14 remaining features, we transformed two features and engineered another five as discussed below:
+<h5> Transformations </h5>
+<ol>
+  <li> RECEIVED_DATE - Simple datatype transformation from object to datetime </li>
+  <li> FULL_ADDRESS - Replaced with a rank-ordered index, with 1 representing the address with the highest call volume, ascending in order inversely to the volume of 311 calls. </li>
+</ol>
+<ol>
+<h5> Engineered Features </h5>
+  <li> REQUEST_CAT </li>
+  <li> RECEIVED_YEAR </li>
+  <li> RECEIVED_MONTH </li>
+  <li> SEASON </li>
+  <li> TOTAL_CALLS </li>
+</ol>
+<h3> Census Income Data </h3>
+
+<h3> Violent Crime Data </h3>
+
 <h2> Data Understanding and Exploration </h2>
+<h3> Overview </h3>
+<h3> Time Series and Seasonality </h3>
+<h3> Customer Observations </h3>
+<h3> Geographic Analysis </h3>
+
 <h2> Data Preparation for Modeling </h2>
 <h2> Modeling </h2>
 <h2> Evaluation </h2>
