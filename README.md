@@ -21,6 +21,7 @@ on 30 September, 2021. The data set is a collection of the public records reques
 <li> Census Household Income Data </li>
 <li> Violent Crime Data </li>
 </ol>
+
 ## Python libraries to install
 Before running any of the Jupyter notebooks mentioned in the repository, the below libraries need to be installed in the local machine using Anaconda:
 
