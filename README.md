@@ -94,8 +94,23 @@ By using each unique address as a "customer", we see one address that is 75% hig
 ![image](https://user-images.githubusercontent.com/78170609/139608857-f3ceb422-2855-4372-ba61-d9d996cdb6a6.png)
 
 ### Geographic Analysis
-Since our 311 Call data contained geospatial data, we decided to map a few data points onto the Charlotte map. A few variables we have explored are Recycle and Non Recycle requests (comparing 2016, 2018, 2020). 
-The Geopandas notebook can be found here: <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/EDA_and_Preprocessing_with_MAPS.ipynb"> EDA and preprocessing with MAPS notebook </a>
+Since our 311 Call data contains geospatial data, we decided to map a few data points onto the Charlotte map and see if we can spot some trends. A few variables we have explored are Recycle and Non Recycle requests (comparing 2016, 2018, 2020). 
+
+For all our charts, please visit our Geopandas notebook here: <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/EDA_and_Preprocessing_with_MAPS.ipynb"> EDA and preprocessing with MAPS notebook </a>
+
+The Charlotte Zip code shape can be found at the <a herf="https://data.charlottenc.gov/"> Charlotte Open Data</a> website.
+
+Below are a few of our observations:
+
+![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/rec_nonrec_all.png)
+
+![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/rec.png)
+
+![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/nonrec.png)
+
+![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/grab_repair_hs.png)
+
+
 
 ## Data Preparation for Modeling
 ## Modeling
