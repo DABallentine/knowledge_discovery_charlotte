@@ -40,13 +40,14 @@ Moving on with the 14 remaining features, we transformed two features and engine
   <li> RECEIVED_DATE - Simple datatype transformation from object to datetime </li>
   <li> FULL_ADDRESS - Replaced with a rank-ordered index, with 1 representing the address with the highest call volume, ascending in order inversely to the volume of 311 calls. </li>
 </ol>
+
 ##### Engineered Features
 <ol>
-  <li> REQUEST_CAT </li>
-  <li> RECEIVED_YEAR </li>
-  <li> RECEIVED_MONTH </li>
-  <li> SEASON </li>
-  <li> TOTAL_CALLS </li>
+<li> REQUEST_CAT - The original data contained 165 separate types of 311 service calls. Many of the categories contained only a handful of records, and many were clearly related to other call types. We therefore decided to bin the call types into a new feature called request categories. Twenty-three of the types were imported directly as categories--mainly the largest categories or those without a clear connection to other types. The remaining call types were binned into 16 categories, yielding 39 final categories. The breakdown of which types were binned into which categories can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/EDA_and_Preprocessing.ipynb"> EDA and preprocessing notebook </a>.  </li>
+  <li> RECEIVED_YEAR - Parsed out the year from the DATE_RECEIVED feature </li>
+  <li> RECEIVED_MONTH - Parsed out the month from the DATE_RECEIVED feature </li>
+  <li> SEASON - Parsed out the quarter from the DATE_RECEIVED feature, which generally differs from the official season of the year by only 1 week </li>
+  <li> TOTAL_CALLS - Summed the total number of calls from each address </li>
 </ol>
 
 ### Census Income Data
@@ -55,8 +56,16 @@ Moving on with the 14 remaining features, we transformed two features and engine
 
 ## Data Understanding and Exploration
 ### Overview
+##### Categories
+Non-Recyclable Items make up over half of the requests and Recyclable Items comprise another 13%. Binning into the 39 categories created a much more even balance through categories 3-16, with each comprising from 7% down to 1% of total requests, as opposed to the inital proportions which were mostly less than 1%. Note that the scale on the graph below is logarithmic to compensate for the imbalance between categories.
+![image](https://user-images.githubusercontent.com/78170609/139606719-8fd9a565-d720-4926-acdf-b705106adb1b.png)
+
 ### Time Series and Seasonality
+Plotting the requests over various time intervals seems to show a steady increase in call volume by year (2016 and 2021 are only partially represented in the data), with 2020 perhaps breaking the trend due to the COVID-19 pandemic. The summer months have the highest volume of requests, particularly in June and July, and there exists a clear trend for the most calls on Monday each week, and then tapering off as the week goes on. Daily, calls are fairly uncommon in the mornings, which was somewhat surprising, peaking in the early afternoon and then decreasing drastically after dinner time.
+![image](https://user-images.githubusercontent.com/78170609/139607530-862f1398-e667-4266-9db6-6e5bc99e65fd.png)
+
 ### Customer Observations
+By using each unique address as a "customer", we see one address that 75% higher than the next highest address by call volume, and thereafter a fairly steady decrease across all addresses. The number one address corresponds to the Sharon Lakes Comdominiums complex located in Starmount Forest, in south Charlotte. The next few addresses also appear to be townhome developments or apartment complexes at various locations across the city. However, the #4 address is in close proximity to the #1 address, which may represent an area of high call volume worth investigating.
 ### Geographic Analysis
 
 ## Data Preparation for Modeling
