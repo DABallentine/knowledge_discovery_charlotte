@@ -57,15 +57,27 @@ Moving on with the 14 remaining features, we transformed two features and engine
 ## Data Understanding and Exploration
 ### Overview
 ##### Categories
-Non-Recyclable Items make up over half of the requests and Recyclable Items comprise another 13%. Binning into the 39 categories created a much more even balance through categories 3-16, with each comprising from 7% down to 1% of total requests, as opposed to the inital proportions which were mostly less than 1%. Note that the scale on the graph below is logarithmic to compensate for the imbalance between categories.
+Non-Recyclable Items make up over half of the requests and Recyclable Items comprise another 13%. Binning into the 39 categories created a much more even balance through categories 3-16, with each comprising from 7% down to 1% of total requests, as opposed to the inital proportions which were mostly much less than 1%. Note that the scale on the graph below is logarithmic to compensate for the imbalance between categories.
 ![image](https://user-images.githubusercontent.com/78170609/139606719-8fd9a565-d720-4926-acdf-b705106adb1b.png)
 
 ### Time Series and Seasonality
 Plotting the requests over various time intervals seems to show a steady increase in call volume by year (2016 and 2021 are only partially represented in the data), with 2020 perhaps breaking the trend due to the COVID-19 pandemic. The summer months have the highest volume of requests, particularly in June and July, and there exists a clear trend for the most calls on Monday each week, and then tapering off as the week goes on. Daily, calls are fairly uncommon in the mornings, which was somewhat surprising, peaking in the early afternoon and then decreasing drastically after dinner time.
 ![image](https://user-images.githubusercontent.com/78170609/139607530-862f1398-e667-4266-9db6-6e5bc99e65fd.png)
 
+We do observe some differences by category when plotting over different timeframes. For example, plotting by season across all categories reveals several categories with peaks during the winter months. Though not as extreme, each of the other seasons does also have one category somewhat above the even 25% split.
+![image](https://user-images.githubusercontent.com/78170609/139609372-6f7c2050-60f9-4b0e-9f53-381fa8bd7090.png)
+![image](https://user-images.githubusercontent.com/78170609/139610261-0550828e-91cf-4047-b74f-985c6873624b.png)
+
+The category with the greatest disparity, SW ONLY - DOOR HANGER LEFT, seems to represent a note left on someone's door by the Solid Waste department. Possible reasons for this trend include a large proportion of the population traveling during the winter months. A closer look reveals that the peak actually occurs in February and March, so it does not seem to correlate to the Christmas or New Year holidays. Without additional data going deeper into the nature of this category, it is difficult to surmise what the trend may represent. FIELD OBSERVED PROBLEMs, almost 50% of which occur during Winter, also occur at a similarly high rate into April, totaling 73% of the year's records just in the first 4 months. This trend could provide a starting point for future research. What are the nature of those field-observed problems? Are there simply more city employees driving around during the early months of the year, or is there some seasonal effect pertaining to winter weather perhaps? We could perhaps answer those questions with the right data added to this analysis.
+Several of the other categories align with common sense. For example, in Spring people return to the city parks, and issues which have cropped up unnoticed over the Winter months are identified and reported. Likewise, as the weather warms and the plants grow, people trim hedges, clean out and re-landscape old areas, and thus have more yard waste than at other times during the year.
+![image](https://user-images.githubusercontent.com/78170609/139609399-f1cf45e5-3be6-4aa8-8609-2950fb97cd0b.png)
+
+The monthly top categories by proportion reveal a few other imbalances across categories. 
+
 ### Customer Observations
-By using each unique address as a "customer", we see one address that 75% higher than the next highest address by call volume, and thereafter a fairly steady decrease across all addresses. The number one address corresponds to the Sharon Lakes Comdominiums complex located in Starmount Forest, in south Charlotte. The next few addresses also appear to be townhome developments or apartment complexes at various locations across the city. However, the #4 address is in close proximity to the #1 address, which may represent an area of high call volume worth investigating.
+By using each unique address as a "customer", we see one address that is 75% higher than the next highest address by call volume, and thereafter a fairly steady decrease across all addresses. The number one address corresponds to the Sharon Lakes Comdominiums complex located in Starmount Forest, in south Charlotte. The next few addresses also appear to be townhome developments or apartment complexes at various locations across the city. However, the #4 address is in close proximity to the #1 address, which may represent an area of high call volume worth investigating.
+![image](https://user-images.githubusercontent.com/78170609/139608857-f3ceb422-2855-4372-ba61-d9d996cdb6a6.png)
+
 ### Geographic Analysis
 
 ## Data Preparation for Modeling
