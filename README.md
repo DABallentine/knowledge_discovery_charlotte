@@ -79,6 +79,8 @@ By using each unique address as a "customer", we see one address that is 75% hig
 ![image](https://user-images.githubusercontent.com/78170609/139608857-f3ceb422-2855-4372-ba61-d9d996cdb6a6.png)
 
 ### Geographic Analysis
+Since our 311 Call data contained geospatial data, we decided to map a few data points onto the Charlotte map. A few variables we have explored are Recycle and Non Recycle requests (comparing 2016, 2018, 2020). 
+The Geopandas notebook can be found here: <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/EDA_and_Preprocessing_with_MAPS.ipynb"> EDA and preprocessing with MAPS notebook </a>
 
 ## Data Preparation for Modeling
 ## Modeling
