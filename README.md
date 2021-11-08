@@ -20,7 +20,7 @@ Do different areas within the city of Charlotte experience higher recurrence of 
 on 30 September, 2021. The data set is a collection of the public records requests received by the City of Charlotte from 2017 through March, 2020. It contains multiple descriptive fields related to service request entry, including request type, location (street, lat/long, etc.), date, city department responsible for the request, and point of entry.
 <li> Census Household Income Data </li> Census data was taken from <a href="https://data.census.gov/cedsci/table?d=ACS%205-Year%20Estimates%20Data%20Profiles&hidePreview=false&vintage=2018&layer=zcta5&tid=ACSDP5Y2019.DP03">the datasets of census.gov</a>. This data set is a collection of household income statistics, Employment statistics, Details about Families and Non-families, People under poverty line and People commuting to work. The dataset consists of 932 rows and 551 features.
 <li> Census Tract Ids and Zip Codes </li> The source of Census Tract Id to Zip code conversion has been taken from <a href="https://www.huduser.gov/portal/datasets/usps_crosswalk.html#data">the dataset portal of huduser.gov</a>. This conversion was necessary to link the census data to 311-Service Requests data. The dataset has 5301 rows and 6 features.
-<li> Violent Crime Data </li> Data was retrieved from the City of Charlotte's <a href="https://data.charlottenc.gov/datasets/charlotte::violent-crime-demographics/about"> Open Data Portal </a> on 30 September, 2021. The dataset is a collection of victims of violence, mainly domestic violence, that occured from 2015-2021. The dataset has an "Attribute Count" which is the number of people(victim/offender) involved in a type of violence crime. We use this as a Violence score to link to our Service Requests Dataset
+<li> CMPD Incidents Crime Data </li> Data was retrieved from the City of Charlotte's <a href="https://data.charlottenc.gov/datasets/charlotte::cmpd-incidents/about"> Open Data Portal </a> on 30 September, 2021. The dataset is a collection of CMPD Incidents reported from 2017-2021. The dataset has both violent and non-violent crimes reported. Any incident reported with NIBRS Code 800 and above is considered non-violent. The dataset is grouped using the Neighborhood Profile Area, month and year to create a CRIME_SCORE.
 
 </ol>
 
@@ -50,25 +50,29 @@ Moving on with the 14 remaining features, we transformed two features and engine
   <li> RECEIVED_MONTH - Parsed out the month from the DATE_RECEIVED feature </li>
   <li> SEASON - Parsed out the quarter from the DATE_RECEIVED feature, which generally differs from the official season of the year by only 1 week </li>
   <li> TOTAL_CALLS - Summed the total number of calls from each address </li>
-  <li> COL_MERGE - Combined RECEIVED_YEAR, RECEIVED_MONTH and NEIGHBORHOOD_PROFILE_AREA for merging 311-Service Requests with Violent Crime dataset </li>
+  <li> COL_MERGE_INDEX - Combined NEIGHBORHOOD_PROFILE_AREA, RECEIVED_MONTH and RECEIVED_YEAR for merging 311-Service Requests with CMPD Crime dataset </li>
 </ol>
 
 ### Census Income Data
 <ol>
   <li>GEO_ID - The original data from the GEO_ID column is in the format 1400000US37119000100. This data has been parsed to only include the 11-digit Tract Id after 'US'.</li>
-  <li>INCOME AND BENEFITS_Households with Income < $15,000 - Feature created by adding up the Income and Benefits of households < $10,000 and between $10,000 to $14,999</li>
-  <li>INCOME AND BENEFITS_Households with Income > $150,000 - Feature created by adding up the Income and Benefits of households between $150,000 to $199,999 and > $200,000</li>
-  <li>INCOME AND BENEFITS_Family Income < $15,000 - Feature created by adding up the Income and Benefits of families < $10,000 and between $10,000 to $14,999</li>
-  <li>INCOME AND BENEFITS_Family Income > $150,000 - Feature created by adding up the Income and Benefits of families between $150,000 to $199,999 and > $200,000</li>
+  <li>INCOME AND BENEFITS_Lower Income Households - Feature created by adding up the Income and Benefits of households less than $10,000 and between $10,000 to $34,999</li>
+  <li>INCOME AND BENEFITS_Mid Income Households - Feature created by adding up the Income and Benefits of households between $35,000 to $149,999</li>
+  <li>INCOME AND BENEFITS_Higher Income Households - Feature created by adding up the Income and Benefits of households between $150,000 to $199,999 and > $200,000</li>
   <li>COMMUTING TO WORK_By Car - Feature created by adding up the commuting to work alone in car and commuting to work by carpool</li>
   <li>ZIP_YEAR - Combined ZIP_CODE and YEAR column to map the data accordingly to the Service Requests dataset</li>
 </ol>
-The dataset consisted of 551 features that were reduced to 44 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/EDA_and_Preprocessing.ipynb"> EDA and preprocessing notebook </a>.  
+The dataset consisted of 551 features that were reduced to 33 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> EDA and preprocessing notebook </a>.  
 
 ### Violent Crime Data
 <ol>
-  <li>COL_MERGE - Combined CALENDAR_YEAR, CALENDAR_MONTH and GEOGRAPHY_ID for merging Violent Crime dataset with 311-Service Requests</li>
+  <li> MONTH - Parsed out the month from the DATE_REPORTED feature </li>
+  <li> COL_MERGE_INDEX - Combined NPA, MONTH and YEAR for merging with 311-Service Requests</li>
+  <li> INCIDENT_COUNT - Total count of incidents reported per NPA every month </li>
+  <li> CRIME_SCORE - a function of INCIDENT_COUNT divided by the total incidents reported in that month and then multiplied by 100 to calculate the percentage</li>
 </ol>
+
+
 ## Data Understanding and Exploration
 ### Overview
 ##### Categories
