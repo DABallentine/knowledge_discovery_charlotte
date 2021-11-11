@@ -69,6 +69,7 @@ The dataset consisted of 551 features that were reduced to 44 features as part o
 <ol>
   <li>COL_MERGE - Combined CALENDAR_YEAR, CALENDAR_MONTH and GEOGRAPHY_ID for merging Violent Crime dataset with 311-Service Requests</li>
 </ol>
+
 ## Data Understanding and Exploration
 ### Overview
 ##### Categories
