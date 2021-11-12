@@ -62,7 +62,7 @@ Moving on with the 14 remaining features, we transformed two features and engine
   <li>COMMUTING TO WORK_By Car - Feature created by adding up the commuting to work alone in car and commuting to work by carpool</li>
   <li>ZIP_YEAR - Combined ZIP_CODE and YEAR column to map the data accordingly to the Service Requests dataset</li>
 </ol>
-The dataset consisted of 551 features that were reduced to 33 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>.  
+The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>.  
 
 ### Violent Crime Data
 <ol>
@@ -72,7 +72,6 @@ The dataset consisted of 551 features that were reduced to 33 features as part o
   <li> CRIME_SCORE - a function of INCIDENT_COUNT divided by the total incidents reported in that month and then multiplied by 100 to calculate the percentage</li>
 </ol>
 The preprocessing of this dataset can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Crime_Data_Preparation Notebook</a>.  
-
 
 ## Data Understanding and Exploration
 ### Overview
