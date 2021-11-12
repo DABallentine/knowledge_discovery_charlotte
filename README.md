@@ -51,14 +51,19 @@ Moving on with the 14 remaining features, we transformed two features and engine
   <li> SEASON - Parsed out the quarter from the DATE_RECEIVED feature, which generally differs from the official season of the year by only 1 week </li>
   <li> TOTAL_CALLS - Summed the total number of calls from each address </li>
   <li> COL_MERGE_INDEX - Combined NEIGHBORHOOD_PROFILE_AREA, RECEIVED_MONTH and RECEIVED_YEAR for merging 311-Service Requests with CMPD Crime dataset </li>
+  <li> HISTORIC_REDLINING - Categorize Neighborhood Profile areas based on historic redlining of Charlotte city in 1935</li>
 </ol>
 
 ### Census Income Data
 The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>. 
 
-##### Engineered Features
+##### Transformations
 <ol>
   <li>GEO_ID - The original data from the GEO_ID column is in the format 1400000US37119000100. This data has been parsed to only include the 11-digit Tract Id after 'US'.</li>
+</ol>
+
+##### Engineered Features
+<ol>
   <li>PERCENT EMPLOYED_In labor force - Percentage of Employed in labor force to the total employed population</li>
   <li>PERCENT EMPLOYED_Not in labor force - Percentage of Employed not in labor force to the total employed population</li>
   <li>PERCENT EMPLOYED_Female Only - Percentage of Females Employed to the total employed population</li>
