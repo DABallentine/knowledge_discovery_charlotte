@@ -44,8 +44,6 @@ Moving on with the 14 remaining features, we transformed two features and engine
 </ol>
 
 ##### Engineered Features
-
-### 311 Service Requests Data
 <ol>
 <li> REQUEST_CAT - The original data contained 165 separate types of 311 service calls. Many of the categories contained only a handful of records, and many were clearly related to other call types. We therefore decided to bin the call types into a new feature called request categories. Twenty-three of the types were imported directly as categories--mainly the largest categories or those without a clear connection to other types. The remaining call types were binned into 16 categories, yielding 39 final categories. The breakdown of which types were binned into which categories can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/EDA_and_Preprocessing.ipynb"> EDA and preprocessing notebook </a>.  </li>
   <li> RECEIVED_YEAR - Parsed out the year from the DATE_RECEIVED feature </li>
@@ -56,6 +54,9 @@ Moving on with the 14 remaining features, we transformed two features and engine
 </ol>
 
 ### Census Income Data
+The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>. 
+
+##### Engineered Features
 <ol>
   <li>GEO_ID - The original data from the GEO_ID column is in the format 1400000US37119000100. This data has been parsed to only include the 11-digit Tract Id after 'US'.</li>
   <li>PERCENT EMPLOYED_In labor force - Percentage of Employed in labor force to the total employed population</li>
@@ -74,16 +75,17 @@ Moving on with the 14 remaining features, we transformed two features and engine
   <li>PERCENT INSURED_Population without health insurance - Feature created by dividing count of people not having health insurance by total count of population</li>
   <li>ZIP_YEAR - Combined ZIP_CODE and YEAR column to map the data accordingly to the Service Requests dataset</li>
 </ol>
-The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>. 
 
 ### CMPD Incidents Crime Data
+The preprocessing of this dataset can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Crime_Data_Preparation Notebook</a>.  
+
+##### Engineered Features
 <ol>
   <li> MONTH - Parsed out the month from the DATE_REPORTED feature </li>
   <li> COL_MERGE_INDEX - Combined NPA, MONTH and YEAR for merging with 311-Service Requests</li>
   <li> INCIDENT_COUNT - Total count of incidents reported per NPA every month </li>
   <li> CRIME_SCORE - a function of INCIDENT_COUNT divided by the total incidents reported in that month and then multiplied by 100 to calculate the percentage</li>
 </ol>
-The preprocessing of this dataset can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Crime_Data_Preparation Notebook</a>.  
 
 ## Data Understanding and Exploration
 ### Overview
