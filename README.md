@@ -44,6 +44,8 @@ Moving on with the 14 remaining features, we transformed two features and engine
 </ol>
 
 ##### Engineered Features
+
+### 311 Service Requests Data
 <ol>
 <li> REQUEST_CAT - The original data contained 165 separate types of 311 service calls. Many of the categories contained only a handful of records, and many were clearly related to other call types. We therefore decided to bin the call types into a new feature called request categories. Twenty-three of the types were imported directly as categories--mainly the largest categories or those without a clear connection to other types. The remaining call types were binned into 16 categories, yielding 39 final categories. The breakdown of which types were binned into which categories can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/EDA_and_Preprocessing.ipynb"> EDA and preprocessing notebook </a>.  </li>
   <li> RECEIVED_YEAR - Parsed out the year from the DATE_RECEIVED feature </li>
@@ -56,15 +58,25 @@ Moving on with the 14 remaining features, we transformed two features and engine
 ### Census Income Data
 <ol>
   <li>GEO_ID - The original data from the GEO_ID column is in the format 1400000US37119000100. This data has been parsed to only include the 11-digit Tract Id after 'US'.</li>
-  <li>INCOME AND BENEFITS_Lower Income Households - Feature created by adding up the Income and Benefits of households less than $10,000 and between $10,000 to $34,999</li>
-  <li>INCOME AND BENEFITS_Mid Income Households - Feature created by adding up the Income and Benefits of households between $35,000 to $149,999</li>
-  <li>INCOME AND BENEFITS_Higher Income Households - Feature created by adding up the Income and Benefits of households between $150,000 to $199,999 and > $200,000</li>
-  <li>COMMUTING TO WORK_By Car - Feature created by adding up the commuting to work alone in car and commuting to work by carpool</li>
+  <li>PERCENT EMPLOYED_In labor force - Percentage of Employed in labor force to the total employed population</li>
+  <li>PERCENT EMPLOYED_Not in labor force - Percentage of Employed not in labor force to the total employed population</li>
+  <li>PERCENT EMPLOYED_Female Only - Percentage of Females Employed to the total employed population</li>
+  <li>PERCENT HOUSEHOLD INCOME_Lower Income Households - Feature created by adding up the Income and Benefits of households < $10,000 and between $10,000 to $34,999 then dividing by Total households</li>
+  <li>PERCENT HOUSEHOLD INCOME_Mid Income Households - Feature created by adding up the Income and Benefits of households between $35,000 to $149,999 then dividing by Total households</li>
+  <li>PERCENT HOUSEHOLD INCOME_Higher Income Households - Feature created by adding up the Income and Benefits of households between $150,000 to $199,999 and > $200,000 then dividing by Total households</li>
+  <li>PERCENT HOUSEHOLD INCOME_Retired Householders - Feature created by dividing number of retired households by  Total households</li>
+  <li>PERCENT COMMUTING TO WORK_By Car - Feature created by adding up the commuting to work alone in car and commuting to work by carpool then dividing by all ways of commuting to work</li>
+  <li>PERCENT COMMUTING TO WORK_Public transportation - Feature created by dividing count commuting by Public Transportation by all ways of commuting to work</li>
+  <li>PERCENT COMMUTING TO WORK_Walk - Feature created by dividing count commuting by Walk by all ways of commuting to work</li>
+  <li>PERCENT COMMUTING TO WORK_Other - Feature created by dividing count commuting by Other means by all ways of commuting to work</li>
+  <li>PERCENT COMMUTING TO WORK_Worked at home - Feature created by dividing count of people working from home by all ways of commuting to work</li>
+  <li>PERCENT INSURED_Population with health insurance - Feature created by dividing count of people having health insurance by total count of population</li>
+  <li>PERCENT INSURED_Population without health insurance - Feature created by dividing count of people not having health insurance by total count of population</li>
   <li>ZIP_YEAR - Combined ZIP_CODE and YEAR column to map the data accordingly to the Service Requests dataset</li>
 </ol>
-The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>.  
+The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>. 
 
-### Violent Crime Data
+### CMPD Incidents Crime Data
 <ol>
   <li> MONTH - Parsed out the month from the DATE_REPORTED feature </li>
   <li> COL_MERGE_INDEX - Combined NPA, MONTH and YEAR for merging with 311-Service Requests</li>
