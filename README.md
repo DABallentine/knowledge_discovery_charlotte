@@ -52,7 +52,9 @@ Moving on with the 14 remaining features, we transformed two features and engine
   <li> TOTAL_CALLS - Summed the total number of calls from each address </li>
   <li> COL_MERGE_INDEX - Combined NEIGHBORHOOD_PROFILE_AREA, RECEIVED_MONTH and RECEIVED_YEAR for merging 311-Service Requests with CMPD Crime dataset </li>
   <li> HISTORIC_REDLINING - Categorize Neighborhood Profile areas based on historic redlining of Charlotte city in 1935</li>
-    ![Historic_red_lining](https://user-images.githubusercontent.com/77910160/145279022-b119553d-3d2f-49d1-bcd4-95d04cb9318e.png)</ol>
+</ol>
+
+![Historic_red_lining](https://user-images.githubusercontent.com/77910160/145282289-1a579fb9-9bf0-4243-8717-268c70a90645.png)
 
 ### Census Income Data
 The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>. 
