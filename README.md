@@ -164,6 +164,10 @@ Apriori algorithm is used to generate association rules for:
     <li>Requests based on Neighborhood Profile Area</li>
 </ol>
 
+### Clustering
+We decided to take all the numerical data in our 311 Calls dataset, combine this with income & crime data and see if we could cluster based on the these numbers. All numerical data was standardized. We were also able to include a categorical variable that relates if a neighborhood has been historically redlined area or not. To be able to use a categorical variable in clustering we used the K-Prototypes clustering package in python. Once the clustering was done, we transfered the cluster ID's back to the original data frame for mapping. We can see that the clusters form distinct patterns in the uptown region, specifically it looks like these clusters incorporate certain neighborhood profile areas. Below are the mapped results.
+
+![image](https://user-images.githubusercontent.com/70532006/145243907-401b0e30-8db8-4cab-aab5-0709390febe6.png)
 
 ### Predictive Modeling
 With such a large computed feature set, we expected and indeed observed a significant degree of multicollinearity amongst the predictors, which would have confounded our attempts at inference based on individual predictors' influences and significance. After attempting both LASSO regression and Recursive Feature Elimination with Cross-Validation, neither method removed enough variables to reduce the multicollinearity problem to a manageable level. Our solution was then a forward-pass stepwise selection regression to select the top 30 variables, from which we dropped an additional 3 with variance inflation factors > 10. 
@@ -172,6 +176,7 @@ With the resulting predictor set of 27 variables, we ran an ElasticNet *Linear R
 
 With the same predictor set, we also ran an ElasticNet *Logistic Regression* to predict the binary target variable of whether the neighborhood was historically red-lined.
 
+## Evaluation
 
 ### Association Rule Mining
 Association Rules generated for each of these categories are:
@@ -194,7 +199,6 @@ Association Rules generated for each of these categories are:
 </ol>
 
 ![image](https://user-images.githubusercontent.com/64916499/145267690-0e9e339d-7ed6-4e57-8757-398f124f81c4.png)
-
 
 ### Predictive Modeling
 
@@ -242,14 +246,6 @@ The predictive models indicate statistically significant relationships between 3
 **Neighborhoods within the city of Charlotte exhibit different 311 service request profiles, which appear to correlate with statistical significance to the neighborhood's median income, and to historical red-lining.**
 
 Disclaimer: This project has neither investigated, inferred, nor implied any causal links relating to 311 service requests, income, and/or historical red-lining. The results above indicate a correlation which needs to be explored much further and in a more controlled manner in greater detail before any causality should be inferred.
-
-
-
-### Clustering
-We decided to take all the numerical data in our 311 Calls dataset, combine this with income & crime data and see if we could cluster based on the these numbers. All numerical data was standardized. We were also able to include a categorical variable that relates if a neighborhood has been historically redlined area or not. To be able to use a categorical variable in clustering we used the K-Prototypes clustering package in python. Once the clustering was done, we transfered the cluster ID's back to the original data frame for mapping. We can see that the clusters form distinct patterns in the uptown region, specifically it looks like these clusters incorporate certain neighborhood profile areas. Below are the mapped results.
-
-![image](https://user-images.githubusercontent.com/70532006/145243907-401b0e30-8db8-4cab-aab5-0709390febe6.png)
-
 
 
 ## Future Work
