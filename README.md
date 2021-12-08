@@ -133,6 +133,7 @@ Below are a few of our observations:
 
 ![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/grab_repair_hs.png)
 
+![image](https://user-images.githubusercontent.com/70532006/145226286-028c9762-71a0-4be9-bf2c-febcf2f0350b.png)
 
 
 ## Data Preparation for Modeling
