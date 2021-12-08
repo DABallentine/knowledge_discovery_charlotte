@@ -125,14 +125,13 @@ The Charlotte Zip code shape can be found at the <a herf="https://data.charlotte
 
 Below are a few of our observations:
 
-![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/rec_nonrec_all.png)
+![image](https://user-images.githubusercontent.com/70532006/145228084-0a841d8e-16dd-4634-94f6-d9e4c5258060.png)
 
-![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/rec.png)
+![image](https://user-images.githubusercontent.com/70532006/145228128-354637d5-0b3d-470b-ad8f-dab15e3f3681.png)
 
-![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/nonrec.png)
+![image](https://user-images.githubusercontent.com/70532006/145228182-82dd2a38-7feb-4839-9f88-2164bab95d74.png)
 
-![image](https://github.com/imad3k/Charlotte-311-Project/blob/main/Data/grab_repair_hs.png)
-
+Historic Red Lining Districts
 ![image](https://user-images.githubusercontent.com/70532006/145226286-028c9762-71a0-4be9-bf2c-febcf2f0350b.png)
 
 
