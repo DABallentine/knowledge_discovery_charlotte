@@ -164,6 +164,11 @@ Apriori algorithm is used to generate association rules for:
     <li>Requests based on Neighborhood Profile Area</li>
 </ol>
 
+### Clustering
+We decided to take all the numerical data in our 311 Calls dataset and see if we could cluster based on the these numbers. We were also able to include a categorical variable that relates if a neighborhood is a redline area or not. For us to be able to use a categorical variable we used the K-Prototypes clustering package in python. Once the clustering was done, we transfered the cluster ID back to the original data frame for mapping. Below are the results.
+![image](https://user-images.githubusercontent.com/70532006/145243907-401b0e30-8db8-4cab-aab5-0709390febe6.png)
+
+
 ### Predictive Modeling
 With such a large computed feature set, we expected and indeed observed a significant degree of multicollinearity amongst the predictors, which would have confounded our attempts at inference based on individual predictors' influences and significance. After attempting both LASSO regression and Recursive Feature Elimination with Cross-Validation, neither method removed enough variables to reduce the multicollinearity problem to a manageable level. Our solution was then a forward-pass stepwise selection regression to select the top 30 variables, from which we dropped an additional 3 with variance inflation factors > 10. 
 
