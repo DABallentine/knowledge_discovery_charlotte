@@ -24,6 +24,8 @@ on 30 September, 2021. The data set is a collection of the public records reques
 
 </ol>
 
+Data not stored in the Data folder on this repository is located in our repository on <a href='https://bitbucket.org/nthammad-uncc/knowledge_discovery_charlotte/src/main/data/'> bitbucket </a>
+
 ## Python libraries to install
 Before running any of the Jupyter notebooks mentioned in the repository, the below libraries need to be installed in the local machine using Anaconda:
 
