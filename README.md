@@ -167,7 +167,7 @@ Apriori algorithm is used to generate association rules for:
 ### Predictive Modeling
 With such a large computed feature set, we expected and indeed observed a significant degree of multicollinearity amongst the predictors, which would have confounded our attempts at inference based on individual predictors' influences and significance. After attempting both LASSO regression and Recursive Feature Elimination with Cross-Validation, neither method removed enough variables to reduce the multicollinearity problem to a manageable level. Our solution was then a forward-pass stepwise selection regression to select the top 30 variables, from which we dropped an additional 3 with variance inflation factors > 10. 
 
-With the resulting predictor set of 27 variables, we ran an ElasticNet *Linear Regression* to control for the remaining multicollinearity, while also allowing additional shrinkage of less important parameters by the L1-norm penalty. The target varaible for this linear regression was a neighborhood's median household income.
+With the resulting predictor set of 27 variables, we ran an ElasticNet *Linear Regression* to control for the remaining multicollinearity, while also allowing additional shrinkage of less important parameters by the L1-norm penalty. The target variable for this linear regression was a neighborhood's median household income.
 
 With the same predictor set, we also ran an ElasticNet *Logistic Regression* to predict the binary target variable of whether the neighborhood was historically red-lined.
 
@@ -194,7 +194,7 @@ Association Rules generated for each of these categories are:
 ### Predictive Modeling
 
 #### Linear Regression
-The linear model showed that after correcting for multicollinearity in the predictors, 11 variables pertaining to 311 requests are highly significant features in predicting median income level of their respective neighborhoods. The model can account for roughly 25% of the varaibility in median income, and can do so with an average error of 22%, or approximately $14,000.
+The linear model showed that after correcting for multicollinearity in the predictors, 11 variables pertaining to 311 requests are highly significant features in predicting median income level of their respective neighborhoods. The model can account for roughly 26% of the variability in median income, and can do so with an average error of 22%, or approximately $14,000.
 ##### Linear Regression Validation Results:
 ![image](https://user-images.githubusercontent.com/78170609/145232562-e4a23bdd-5a41-44f3-b663-48d804463499.png)
 
@@ -241,7 +241,6 @@ Disclaimer: This project has neither investigated, inferred, nor implied any cau
 ## Future Work
 ### Possible future work may include:
 <ol>
-  <li>Improve existing model fit</li>
   <li>Improve existing model fit</li>
   <li>Explore correlations between weather and 311 service requests</li>
   <li>Predict high call volume days or periods to alleviate workload and wait time concerns</li>
