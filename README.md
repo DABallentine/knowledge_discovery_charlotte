@@ -194,8 +194,8 @@ Association Rules generated for each of these categories are:
     We see DEAD ANIMAL COLLECTION, 311 DOCUMENT, TRANSPORTATION and MISSED SERVICE to be common rules such that if any of these are raised, chances of RECYCLABLE ITEMS, NON_RECYCLABLE ITEMS, GARBAGE, CART, RECYCLING, HNS HEALTH AND SANITATION are likely to also be raised in a particular neighborhood profile area during a monthly timeframe. In contrast to low income datasets, we do not see VIOLATIONS requests in combinations of association rules, which makes us question if Crime and Violation requests are related to the crime index or low income areas.</li>
     <li>Requests based on Neighborhood Profile Area: <br/>
     Association rules show that certain request types tend to occur together during the same month in the neighborhood profile areas 3, 371, 378, 392, 393, 385</li>
-    <p> ![image](https://user-images.githubusercontent.com/64916499/145266948-0ff37978-b6fb-4e85-ad53-5d595a8a25f8.png)
-    </p>
+![image](https://user-images.githubusercontent.com/64916499/145267317-deab8902-13c2-45a1-8262-bf2cbd1437ee.png)
+
 </ol>
 
 ### Predictive Modeling
