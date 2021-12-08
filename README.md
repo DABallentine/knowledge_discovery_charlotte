@@ -133,6 +133,8 @@ Below are a few of our observations:
 
 ![image](https://user-images.githubusercontent.com/70532006/145228182-82dd2a38-7feb-4839-9f88-2164bab95d74.png)
 
+The map above seems to uncover a relative lack of health and sanitation requests in the South Charlotte area, which generally corresponds to some of the wealthier neighborhoods in the city.
+
 Historic Red Lining Districts
 ![image](https://user-images.githubusercontent.com/70532006/145226286-028c9762-71a0-4be9-bf2c-febcf2f0350b.png)
 
