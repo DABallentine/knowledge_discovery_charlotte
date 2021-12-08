@@ -136,9 +136,21 @@ Below are a few of our observations:
 
 
 ## Data Preparation for Modeling
+
+Before we can begin most of these techniques, we will need to transform our existing data into a form suitable for the algorithm to be applied.
+Currently, our data exists in this form:
+
+![image](https://user-images.githubusercontent.com/78170609/145226577-8fd024a3-8b5f-4fe4-8fff-9209e963769b.png)
+
+Each record in the data represents a single 311 request. However, as stated in our research question, we are interested in whether “different areas within the city of Charlotte experience higher recurrence of any type of 311 service request than other areas” and then exploring any correlations between an area’s 311 service request profile and any “red-line districts or other known demographic or socioeconomic profiles”. Thus, the entity (i.e. record) of primary interest to us is the area, not the single request, and we will need to generally transform the data into the form below:
+
+![image](https://user-images.githubusercontent.com/78170609/145226635-0e01ddd3-8322-475b-8fe6-6a0b8a7d9ee7.png)
+
 ### Association Rule Mining
 Two new features are created to assign the predominant income levels and crime levels that the request neighborhood belongs to as PREDOMINANT_INCOME_BRACKET and CRIME_INDEX. Service Requests data is arranged as a matrix using a MERGE_INDEX (feature created as a combination of month, year and neighborhood profile area) and REQUEST_CAT, with the cell value of the matrix being the count of request raised based on the type, in a neighborhood, on a monthly basis. Since Association rules only accepts binary data (0 or 1), any cell having a value 0 is used as it is, and any cell having a value greater than 0 is used as 1. This format resembles the shopping basket format required to successfully generate association rules
 
+### Predictive Modeling
+Data preparation began very similar to that for association rules, with each record representing a monthly summary of a Neighborhood Profile Area rather than an individual 311 request. The key difference from association rule data is that the records are not binary, rather aggregate statistics of 311 calls. We compute 4 key aggregate statistics by month for each of the 39 service request categories: total volume, standard deviation, distribution, and proportion of late requests. Total volume for a NPA for a given month is divided by that neighborhood's population to yield a per capita volume, and then multiplied by 1000 to represent number of requests per thousand residents. Standard deviation is calculated for the month's distribution of daily request totals. The distribution variable is simply the number of unique addresses that supplied the 311 requests for each category for that month. Finally, the late variable is the proportion of requests that were submitted between 21:00 and 05:00. The resulting data set had 156 predictor variables from the 311 requests, the crime score, a crime x volume interaction term, and the two target variables--one binary, one continuous--for a total size of 160 features.
 
 ## Modeling
 ### Association Rule Mining
@@ -152,6 +164,12 @@ Apriori algorithm is used to generate association rules for:
     <li>Requests based on Neighborhood Profile Area</li>
 </ol>
 
+### Predictive Modeling
+With such a large computed feature set, we expected and indeed observed a significant degree of multicollinearity amongst the predictors, which would have confounded our attempts at inference based on individual predictors' influences and significance. After attempting both LASSO regression and Recursive Feature Elimination with Cross-Validation, neither method removed enough variables to reduce the multicollinearity problem to a manageable level. Our solution was then a forward-pass stepwise selection regression to select the top 30 variables, from which we dropped an additional 3 with variance inflation factors > 10. 
+
+With the resulting predictor set of 27 variables, we ran an ElasticNet *Linear Regression* to control for the remaining multicollinearity, while also allowing additional shrinkage of less important parameters by the L1-norm penalty. The target varaible for this linear regression was a neighborhood's median household income.
+
+With the same predictor set, we also ran an ElasticNet *Logistic Regression* to predict the binary target variable of whether the neighborhood was historically red-lined.
 
 ## Evaluation
 ### Association Rule Mining
@@ -173,11 +191,58 @@ Association Rules generated for each of these categories are:
     Association rules show that certain request types tend to occur together during the same month in the neighborhood profile areas 3, 371, 378, 392, 393, 385</li>
 </ol>
 
+### Predictive Modeling
+
+#### Linear Regression
+The linear model showed that after correcting for multicollinearity in the predictors, 11 variables pertaining to 311 requests are highly significant features in predicting median income level of their respective neighborhoods. The model can account for roughly 25% of the varaibility in median income, and can do so with an average error of 22%, or approximately $14,000.
+##### Linear Regression Validation Results:
+![image](https://user-images.githubusercontent.com/78170609/145232562-e4a23bdd-5a41-44f3-b663-48d804463499.png)
+
+![image](https://user-images.githubusercontent.com/78170609/145232320-cf6dd071-ff12-4f80-9ce1-c87e31041a92.png)
+
+##### Inferences
+Some of the observed effects are summarized below:
+
+CART_VOL: Number of requests in the CART category per 1,000 people in one month
+- From an increase by 1 request per thousand citizens in the average monthly volume of CART requests for a given neighborhood, we can expect with 95% confidence that our model's prediction of that neighborhood's median income will be between $4,908 and $5,621 lower. That is, poorer neighborhoods appear to have a higher per capita volume of CART-related requests.
+
+RECYCLABLE ITEMS_VOL: Number of recyclable items requests per 1,000 people in one month
+- From an increase by 1 request per thousand citizens in the average monthly volume of RECYCLABLE ITEMS requests for a given neighborhood, we can expect with 95% confidence that our model's prediction of that neighborhood's median income will be between $7,072 and $7,626 lower. Likewise, poorer neighborhoods appear to have a higher volume of recycling requests.
+
+NON_RECYCLABLE ITEMS_VOL: Number of non-recyclable items requests per 1,000 people in one month
+- From an increase by 1 request per thousand citizens in the average monthly volume of NON_RECYCLABLE ITEMS requests for a given neighborhood, we can expect with 95% confidence that our model's prediction of that neighborhood's median income will be between $1,769 and $1,979 higher. In this case, richer neighborhoods appear to have a higher volume of non-recyclable requests.
+
+#### Logistic Regression
+The model shows that 14 variables pertaining to 311 requests are highly significant features in predicting whether a neighborhood was historically a red-lined district, which it can predict with 76% accuracy.
+##### Logistic Regression Validation Results:
+![image](https://user-images.githubusercontent.com/78170609/145233477-d747dd7b-1652-46de-91b0-51236b270345.png)
+
+![image](https://user-images.githubusercontent.com/78170609/145233726-e88bb664-9625-421a-9b68-e295f07d63cb.png)
+
+##### Inferences
+Some of the observed effects are summarized below:
+
+CART_VOL: Number of requests in the CART category per 1,000 people in one month
+- From an increase of 1 request per thousand citizens in the average monthly volume of CART requests for a given neighborhood, we can expect with 95% confidence that the odds of that neighborhood being labeled a historically redlined district will increase by a factor between 5.8 and 6.5. That is, higher per capita volume of CART-related requests is positively associated with historically redlined districts. The accuracy of the model's assigned label of course remains only 76%.
+
+RECYCLABLE ITEMS_VOL: Number of recyclable items requests per 1,000 people in one month
+- From an increase by 1 request per thousand citizens in the average monthly volume of RECYCLABLE ITEMS requests for a given neighborhood, we can expect with 95% confidence that the odds of that neighborhood being labeled a historically redlined district will decrease by a factor between 0.46 and 0.43 -- roughly a 55% reduction in the odds. That is, higher per capita volume of RECYCLABLE ITEM-related requests is negatively associated with historically redlined districts. The accuracy of the model's assigned label of course remains only 76%.
+
+NON_RECYCLABLE ITEMS_VOL: Number of non-recyclable items requests per 1,000 people in one month
+- From an increase by 1 request per thousand citizens in the average monthly volume of NON_RECYCLABLE ITEMS requests for a given neighborhood, we can expect with 95% confidence that the odds of that neighborhood being labeled a historically redlined district will increase by a factor between 3.37 and 3.46. That is, higher per capita volume of NON-RECYCLABLE ITEM-related requests is positively associated with historically redlined districts. The accuracy of the model's assigned label of course remains only 76%.
 
 ## Results
+The predictive models indicate statistically significant relationships between 311 request behavior and median income as well as 311 request behavior and historical red-lining. The linear model explains only 26% of the total variance in median income with an average error of 22%, and the logistic model accurately predicts red-lined districts only 76% of the time. The predictive capabilities of both models are meager at best, but the results are sufficient to confirm the hypothesis behind our research question for this project:
+
+**Neighborhoods within the city of Charlotte exhibit different 311 service request profiles, which appear to correlate with statistical significance to the neighborhood's median income, and to historical red-lining.**
+
+Disclaimer: This project has neither investigated, inferred, nor implied any causal links relating to 311 service requests, income, and/or historical red-lining. The results above indicate a correlation which needs to be explored much further and in a more controlled manner in greater detail before any causality should be inferred.
+
 ## Future Work
-## Possible future work may include:
+### Possible future work may include:
 <ol>
+  <li>Improve existing model fit</li>
+  <li>Improve existing model fit</li>
   <li>Explore correlations between weather and 311 service requests</li>
   <li>Predict high call volume days or periods to alleviate workload and wait time concerns</li>
   <li>Explore correlations between location and specific service requests' response times</li>
