@@ -52,7 +52,7 @@ Moving on with the 14 remaining features, we transformed two features and engine
   <li> TOTAL_CALLS - Summed the total number of calls from each address </li>
   <li> COL_MERGE_INDEX - Combined NEIGHBORHOOD_PROFILE_AREA, RECEIVED_MONTH and RECEIVED_YEAR for merging 311-Service Requests with CMPD Crime dataset </li>
   <li> HISTORIC_REDLINING - Categorize Neighborhood Profile areas based on historic redlining of Charlotte city in 1935</li>
-</ol>
+    ![Historic_red_lining](https://user-images.githubusercontent.com/77910160/145279022-b119553d-3d2f-49d1-bcd4-95d04cb9318e.png)</ol>
 
 ### Census Income Data
 The dataset consisted of 551 features that were reduced to 24 features as part of the data preprocessing which can be seen in the <a href="https://github.com/DABallentine/knowledge_discovery_charlotte/blob/main/Jupiter%20Notebooks/Census_Data_Preparation.ipynb"> Census Data Preparation Notebook</a>. 
@@ -179,24 +179,54 @@ With the same predictor set, we also ran an ElasticNet *Logistic Regression* to 
 ## Evaluation
 
 ### Association Rule Mining
-Association Rules generated for each of these categories are:
+On a high level, NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS are the highest in the frequent item sets which aligns with our data because these two are the highest reported type of 311 service requests. The next highest are CART, TRANSPORTATION, HNS HEALTH AND SANITATION, MISSED SERVICE, GARBAGE and RECYCLING. All these are likely to occur in the same neighborhood profile area along with NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS within a time-span of a month. A few instances of 311 DOCUMENT is likely to occur with NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS.
+The frequent items list generated is shown below:
+
+![Frequent lists](https://user-images.githubusercontent.com/77910160/145279784-e7610da4-396b-4ffa-8eb3-a03ddbdef159.png)
+
+The outcomes of Association rules are:
 <ol>
-    <li>The entire dataset: <br/>
-    NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS are the highest in the frequest item sets which aligns with our data because these two are the highest reported type of 311 service requests. The next highest are CART, TRANSPORTATION, HNS HEALTH AND SANITATION, MISSED SERVICE, GARBAGE and RECYCLING. All these are likely to occur in the same neighborhood profile area along with NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS within a time-span of a month. A few instances of 311 DOCUMENT is likely to occur with NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS. <br/>
-    We observe that if HNS HEALTH AND SANITATION, RECYCLING or YARD WASTE requests are raised, chances of GARBAGE, MISSED SERVICE, CART or RECYCLABLE ITEMS are likely to also be raised in a particular neighborhood profile area during a monthly timeframe. We also see a lot of association rules related to VIOLATIONS requests raised alond with some of the above mentioned types of requests.</li> 
-    <li>Requests from High income areas: <br/>
-    Similar to assocition rules for the entire dataset, we see that if NON_RECYCLABLE ITEMS and HNS HEALTH AND SANITATION requests are raised, chances of RECYCLABLE ITEMS request are likely to also be raised. Also, requests on TIRES have chances of raising NON_RECYCLABLE ITEMS in a particular neighborhood profile area during a monthly timeframe.</li>
-    <li>Requests from Mid income areas: <br/>
-    We see that if GARBAGE, YARD WASTE, RECYCLING requests are raised, chances of MISSED SERVICE, RECYCLABLE ITEMS, CART, TRANSPORTATION are likely to also be raised in a particular neighborhood profile area during a monthly timeframe. We also see the above requests in combination with NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS requests. One difference we observe is, we don't see VIOLATIONS requests as part of the association rules for mid income group
+    <li>The entire dataset:
+        <ul>
+            <li>We can say with 65% confidence that if HNS HEALTH AND SANITATION, RECYCLING or YARD WASTE requests are raised, chances of GARBAGE, MISSED SERVICE, CART or RECYCLABLE ITEMS are likely to also be raised in a particular neighborhood profile area during a monthly timeframe</li>
+            <li>These can also be seen in combination with NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS</li>
+            <li>We can also say that if VIOLATIONS are raised, chances of HNS HEALTH AND SANITATION, RECYCLABLE ITEMS, CART, GARBAGE, TRANSPORTATION or NON_RECYCLABLE ITEMS are likely to also be raised</li>
+        </ul>
     </li>
-    <li>Requests from Low income areas: <br/>
-    We see that if HNS HEALTH AND SANITATION, RECYCLING requests are raised, chances of RECYCLABLE ITEMS, NON_RECYCLABLE ITEMS, TRANSPORTATION are likely to also be raised in a particular neighborhood profile area during a monthly timeframe. We also see the above requests in combination with CART, GARBAGE and MISSED SERVICE requests. We observe that association rules for low income group have some combinations of VIOLATIONS requests.</li>
-    <li>Requests from Mid & High Crime index areas: <br/>
-    We see DEAD ANIMAL COLLECTION, 311 DOCUMENT, TRANSPORTATION and MISSED SERVICE to be common rules such that if any of these are raised, chances of RECYCLABLE ITEMS, NON_RECYCLABLE ITEMS, GARBAGE, CART, RECYCLING, HNS HEALTH AND SANITATION are likely to also be raised in a particular neighborhood profile area during a monthly timeframe. In contrast to low income datasets, we do not see VIOLATIONS requests in combinations of association rules, which makes us question if Crime and Violation requests are related to the crime index or low income areas.</li>
-    <li>Requests based on Neighborhood Profile Area: <br/>
-    Association rules show that certain request types tend to occur together during the same month in the neighborhood profile areas 3, 371, 378, 392, 393, 385
+    <li>Requests from High income areas:
+        <ul>
+            <li>Since the count of records for higher income group is lesser, the threshold value had to be reduced to 0.005</li>
+            <li>We can say with 41% confidence that if NON_RECYCLABLE ITEMS and HNS HEALTH AND SANITATION requests are raised, chances are RECYCLABLE ITEMS are likely to also be raised in a particular neighborhood profile area during a monthly timeframe</li>
+            <li>We can also say with 95% confidence that if TIRES requests are raised, NON_RECYCLABLE ITEMS are likely to also be raised</li>
+        </ul>
+    </li>
+    <li>Requests from Mid income areas:
+        <ul>
+            <li>We can say with 70% confidence that if GARBAGE, YARD WASTE, RECYCLING requests are raised, chances of MISSED SERVICE, RECYCLABLE ITEMS, CART, TRANSPORTATION are likely to also be raised in a particular neighborhood profile area during a monthly timeframe</li>
+            <li>We also see the above requests in combination with NON_RECYCLABLE ITEMS and RECYCLABLE ITEMS requests</li>
+            <li>We also observe a difference that we don't see VIOLATIONS requests as part of the association rules for mid income group</li>
+        </ul>
+    </li>
+    <li>Requests from Low income areas:
+        <ul>
+            <li>We can say with 85% confidence that if (HNS HEALTH AND SANITATION & RECYCLING) or (CART & RECYCLING) requests are raised, chances of TRANSPORTATION, NON_RECYCLABLE ITEMS, RECYCLABLE ITEMS are likely to also be raised in a particular neighborhood profile area during a monthly timeframe</li>
+            <li>We also see the above requests in combination with CART, GARBAGE and MISSED SERVICE requests</li>
+        </ul>
+    </li>
+    <li>Requests from Mid & High Crime index areas:
+        <ul>
+            <li>We see DEAD ANIMAL COLLECTION, 311 DOCUMENT, TRANSPORTATION and MISSED SERVICE to be a common antecedent</li>
+            <li>We can say with 77% confidence that if any of them are raised, chances of RECYCLABLE ITEMS, NON_RECYCLABLE ITEMS, GARBAGE, CART, RECYCLING, HNS HEALTH AND SANITATION are likely to also be raised in a particular neighborhood profile area during a monthly timeframe</li>
+            <li>In contrast to low income datasets, we do not see VIOLATIONS requests in combinations of association rules, which makes us question if Crime and Violation requests are related to the crime index or low income areas</li>
+        </ul>
+    </li>
+    <li>Requests based on Neighborhood Profile Area:
+        <ul>
+            <li>We can say with 80% confidence similar requests types tend to occur a lot more than common during the same month in neighborhood profile areas 3, 371, 378, 392, 393, 385</li>
+        </ul>
     </li>
 </ol>
+
 
 ![image](https://user-images.githubusercontent.com/64916499/145267690-0e9e339d-7ed6-4e57-8757-398f124f81c4.png)
 
