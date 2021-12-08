@@ -20,6 +20,12 @@ on 30 September, 2021. The data set is a collection of the public records reques
 <h2> Data Understanding and Exploration </h2>
 <h2> Data Preparation for Modeling </h2>
 <h2> Modeling </h2>
+<b>Clustering</b>
+<p>
+We decided to take all the numerical data in our 311 Calls dataset and see if we could cluster based on the these numbers. We were also able to include a categorical variable that relates if a neighborhood is a redline area or not. For us to be able to use a categorical variable we used the K-Prototypes clustering package in python. Once the clustering was done, we transfered the cluster ID back to the original data frame for mapping. Below are the results.
+  
+![image](https://user-images.githubusercontent.com/64916499/145239196-a8f8cdb8-017a-4c2c-adaf-df608641f479.png)
+
 <h2> Evaluation </h2>
 <h2> Results </h2>
 <h2> Future Work </h2>
